@@ -1,0 +1,84 @@
+@CHARSET "ISO-8859-1";
+
+body{
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.view {
+	height: 600px;
+}
+
+.board {
+	width: 750px;
+	height: 400px;
+	/* position: absolute; */
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 5px;
+	background-image: url('../img/board-bg.png');
+}
+
+.top-row {
+	height: 50%;
+	/* position: absolute;  */
+	top: 5px;
+}
+
+.bottom-row {
+	height: 50%;
+	/* position: absolute;  */
+	bottom: 5px; 
+	padding-left: 100px;
+}
+
+.bottom-row .aligned-to-bottom {
+	margin-top: 75px;
+}
+
+.rect-round-coreners {
+	background-color: #DDB47F;
+	border: 1px solid black;
+	border-radius: 10px 10px;
+	width: 80px;
+	height: 120px;
+	float: left;
+	margin-left: 10px;
+}
+
+.big-rect-round-coreners {
+	height: 100%;
+}
+
+.circle {
+	width: 10px;
+	height: 10px;
+	border: 1px solid beige;
+	border-radius: 50%;
+	background-color: beige;
+	margin: 4px;
+	float: left;
+}
+
+.message {
+    width: 750px;
+}
+
+.big-button {
+	width: 200px;
+}
+
+.centered {
+	text-align: center;
+    z-index: -1;
+    margin-left: auto;
+    margin-right: auto;
+}

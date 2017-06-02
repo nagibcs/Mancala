@@ -1,0 +1,38 @@
+<section>
+	<div class="container">
+		
+		<div class="view">
+			<div class="board">
+				
+				<div class="top-row">
+					<div ng-if="initialized" id="pit_{{board.pits[1][pitsPerPlayer-1].getId()}}" class="rect-round-coreners big-rect-round-coreners">
+						<div class='circle' ng-repeat="s in [] | range:board.pits[1][pitsPerPlayer-1].seeds"></div>
+					</div>
+					<div id="pit_{{pit.getId()}}" class="rect-round-coreners" ng-repeat="pit in board.pits[1] | reverse: pitsPerPlayer-1">
+						<div class='circle' ng-repeat="s in [] | range:pit.seeds"></div>
+					</div>
+				</div>
+				
+				<div class="bottom-row">
+					<div id="pit_{{pit.getId()}}" class="rect-round-coreners aligned-to-bottom" ng-repeat="pit in board.pits[0] | limitTo: pitsPerPlayer-1" ng-click="play(pit, true)">
+						<div class='circle' ng-repeat="s in [] | range:pit.seeds"></div>
+					</div>
+					<div ng-if="initialized" id="pit_{{board.pits[0][pitsPerPlayer-1].getId()}}" class="rect-round-coreners big-rect-round-coreners">
+						<div class='circle' ng-repeat="s in [] | range:board.pits[0][pitsPerPlayer-1].seeds"></div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="message centered">
+				<h3>{{getMessage()}}</h3>
+			</div>
+			
+			<div class="centered big-button" ng-if="finished">
+				<input type="submit" value="New Game" ng-click="restart()" class="btn btn-info btn-block">
+			</div>
+			
+		</div>
+		
+	</div>
+</section>
