@@ -14,6 +14,12 @@ import org.springframework.stereotype.Component;
 import game.model.User;
 import game.service.UserService;
 
+/**
+ * 
+ * This class does not implement a real authentication logic. If the user is found
+ * then he/she is authenticated, otherwise the user is registered and considered authenticated.
+ *
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider
 {

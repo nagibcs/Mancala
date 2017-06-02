@@ -34,11 +34,17 @@ public class Board
 		kalahs.put(boardSide, kalah);
 	}
 	
+	/**
+	 * This method set the relationship between each pair of
+	 * pits on the board. E.g. The first pit of the southern player
+	 * is opposite to the last pit of the northen player.
+	 */
 	private void setOppositePits()
 	{
 		for (int i=0 ; i < pitsPerSide ; i++)
 		{
 			AbstractPit downPit = pits.get(i);
+			// pits.size() - i - 2 => skips the last element in the list because it is the kalah.
 			AbstractPit upPit = pits.get(pits.size() - i - 2);
 			downPit.setOppositePit(upPit);
 			upPit.setOppositePit(downPit);
