@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class User
 {
-
 	private int id;
 
 	private String username;
@@ -63,7 +62,10 @@ public class User
 	@Override
 	public String toString()
 	{
-		return new StringBuilder().append("{id: ").append(id).append(", name: ").append(username).append('}')
+		return new StringBuilder()
+				.append("{id: ").append(id)
+				.append(", name: ").append(username)
+				.append('}')
 				.toString();
 	}
 }

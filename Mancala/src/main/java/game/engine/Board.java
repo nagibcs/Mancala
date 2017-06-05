@@ -20,12 +20,12 @@ public class Board
 	public Board(PitFactory pitFactory)
 	{
 		this.pitsPerSide = pitFactory.getPitsCountPerSide();
-		addPitsForBoardSide(BoardSide.SOUTH, pitFactory);
-		addPitsForBoardSide(BoardSide.NORTH, pitFactory);
+		initPits(BoardSide.SOUTH, pitFactory);
+		initPits(BoardSide.NORTH, pitFactory);
 		setOppositePits();
 	}
 	
-	private void addPitsForBoardSide(BoardSide boardSide, PitFactory pitFactory)
+	private void initPits(BoardSide boardSide, PitFactory pitFactory)
 	{
 		for(int i=0 ; i < pitsPerSide ; i++)
 			pits.add(pitFactory.createPit(i, boardSide));
@@ -35,9 +35,9 @@ public class Board
 	}
 	
 	/**
-	 * This method set the relationship between each pair of
+	 * This sets the relationship between each pair of
 	 * pits on the board. E.g. The first pit of the southern player
-	 * is opposite to the last pit of the northen player.
+	 * is opposite to the last pit of the northern player.
 	 */
 	private void setOppositePits()
 	{
@@ -49,17 +49,6 @@ public class Board
 			downPit.setOppositePit(upPit);
 			upPit.setOppositePit(downPit);
 		}
-	}
-	
-	public boolean hasSeeds(BoardSide boardSide)
-	{
-		CircularIterator it = new CircularIterator(boardSide, 0);
-		for (int i=0 ; i < pitsPerSide ; i++)
-		{
-			if (it.next().getSeeds() > 0)
-				return true;
-		}
-		return false;
 	}
 	
 	public BoardSide playPit(BoardSide seeder, int pit)
@@ -96,6 +85,17 @@ public class Board
 		}
 	}
 	
+	public boolean hasSeeds(BoardSide boardSide)
+	{
+		CircularIterator it = new CircularIterator(boardSide, 0);
+		for (int i=0 ; i < pitsPerSide ; i++)
+		{
+			if (it.next().getSeeds() > 0)
+				return true;
+		}
+		return false;
+	}
+		
 	public void moveAllSeedsToKalahs()
 	{
 		for (AbstractPit pit : pits)
