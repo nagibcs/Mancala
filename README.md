@@ -6,7 +6,7 @@
 3. On the login page provide a username (no need for password), the user will be stored in memory.
 
 ## How to build:
-After cloning the repo. use the following maven command:
+After checking out the repo. use the following maven command:
 ```
 mvn clean install
 ```
