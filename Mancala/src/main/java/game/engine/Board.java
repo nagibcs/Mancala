@@ -17,21 +17,45 @@ public class Board
 	private final List<AbstractPit> pits = new ArrayList<>();
 	private final Map<BoardSide, AbstractPit> kalahs = new EnumMap<>(BoardSide.class);
 	
-	public Board(PitFactory pitFactory)
+	public static Board create(int pitsPerSide, int initialSeeds)
 	{
-		this.pitsPerSide = pitFactory.getPitsCountPerSide();
-		initPits(BoardSide.SOUTH, pitFactory);
-		initPits(BoardSide.NORTH, pitFactory);
-		setOppositePits();
+		Board board = new Board(pitsPerSide);
+		board.initPits(BoardSide.SOUTH, initialSeeds);
+		board.initPits(BoardSide.NORTH, initialSeeds);
+		board.setOppositePits();
+		
+		return board;
 	}
 	
-	private void initPits(BoardSide boardSide, PitFactory pitFactory)
+	private void initPits(BoardSide owner, int initialSeeds)
 	{
 		for(int i=0 ; i < pitsPerSide ; i++)
-			pits.add(pitFactory.createPit(i, boardSide));
-		AbstractPit kalah = pitFactory.createKalah(boardSide);
+			pits.add(new Pit(owner, initialSeeds));
+		AbstractPit kalah = new Kalah(owner, 0);
 		pits.add(kalah);
-		kalahs.put(boardSide, kalah);
+		kalahs.put(owner, kalah);
+	}
+	
+	public static Board createWithSeeds(int[] southernPits, int[] northenPits)
+	{
+		if (northenPits.length != southernPits.length)
+			throw new IllegalArgumentException("Number of pits on both sides of the board should be equal");
+		
+		Board board = new Board(northenPits.length - 1);
+		board.initPits(BoardSide.SOUTH, southernPits);
+		board.initPits(BoardSide.NORTH, northenPits);
+		board.setOppositePits();
+		
+		return board;
+	}
+	
+	private void initPits(BoardSide owner, int[] initialSeeds)
+	{
+		for(int i=0 ; i < pitsPerSide ; i++)
+			pits.add(new Pit(owner, initialSeeds[i]));
+		AbstractPit kalah = new Kalah(owner, initialSeeds[initialSeeds.length-1]);
+		pits.add(kalah);
+		kalahs.put(owner, kalah);
 	}
 	
 	/**
@@ -49,6 +73,11 @@ public class Board
 			downPit.setOppositePit(upPit);
 			upPit.setOppositePit(downPit);
 		}
+	}
+	
+	private Board(int pitsPerSide)
+	{
+		this.pitsPerSide = pitsPerSide;
 	}
 	
 	public BoardSide playPit(BoardSide seeder, int pit)

@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import game.engine.Board.BoardSide;
 import game.model.User;
-import jersey.repackaged.com.google.common.collect.ImmutableMap;
 
 public class TestUtil
 {
@@ -31,10 +30,4 @@ public class TestUtil
 		return new Player(user, boardSide);
 	}
 	
-	public static PitFactory createPitFactory(Integer[] downSidePits, Integer[] upSidePits)
-	{
-		ImmutableMap<BoardSide, Integer[]> map = ImmutableMap.of(BoardSide.SOUTH, downSidePits, BoardSide.NORTH, upSidePits);
-		return new MockPitFactory(downSidePits.length-1, map);
-	}
-
 }

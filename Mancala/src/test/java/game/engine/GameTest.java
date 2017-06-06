@@ -1,6 +1,5 @@
 package game.engine;
 
-import static game.engine.TestUtil.createPitFactory;
 import static game.engine.TestUtil.createPlayer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -27,7 +26,7 @@ public class GameTest
 	
 	@Test
 	public void testPlayPit() throws IllegalMoveException {
-		Game game = new Game(player1, player2, new PitFactoryImpl(6, 6));
+		Game game = new Game(player1, player2, Board.create(6, 6));
 		
 		game.playPit(player1, 0);
 		assertEquals(player1, game.getTurn());
@@ -58,7 +57,7 @@ public class GameTest
 	@Test
 	public void testPlayEmptyPit() throws IllegalMoveException 
 	{
-		Game game = createGame(new Integer[]{0, 0, 0, 0, 0, 2, 40}, new Integer[]{4, 4, 8, 0, 0, 2, 12});
+		Game game = createGame(new int[]{0, 0, 0, 0, 0, 2, 40}, new int[]{4, 4, 8, 0, 0, 2, 12});
 		game.playPit(player1, 4);
 		
 		assertEquals(player1, game.getTurn());
@@ -73,7 +72,7 @@ public class GameTest
 	@Test
 	public void testWin_player1() throws IllegalMoveException 
 	{
-		Game game = createGame(new Integer[]{0, 0, 0, 0, 0, 2, 40}, new Integer[]{4, 4, 8, 0, 0, 2, 12});
+		Game game = createGame(new int[]{0, 0, 0, 0, 0, 2, 40}, new int[]{4, 4, 8, 0, 0, 2, 12});
 		game.playPit(player1, 5);
 		
 		assertNull(game.getTurn());
@@ -87,7 +86,7 @@ public class GameTest
 	@Test
 	public void testWin_player2() throws IllegalMoveException 
 	{
-		Game game = createGame(new Integer[]{4, 4, 8, 0, 0, 2, 12}, new Integer[]{0, 0, 0, 0, 0, 2, 40});
+		Game game = createGame(new int[]{4, 4, 8, 0, 0, 2, 12}, new int[]{0, 0, 0, 0, 0, 2, 40});
 		game.setTurn(player2);
 		game.playPit(player2, 5);
 		
@@ -102,7 +101,7 @@ public class GameTest
 	@Test
 	public void testTie() throws IllegalMoveException 
 	{
-		Game game = createGame(new Integer[]{0, 0, 0, 0, 0, 1, 10}, new Integer[]{1, 0, 2, 0, 2, 0, 6});
+		Game game = createGame(new int[]{0, 0, 0, 0, 0, 1, 10}, new int[]{1, 0, 2, 0, 2, 0, 6});
 		game.playPit(player1, 5);
 		
 		assertNull(game.getTurn());
@@ -116,12 +115,12 @@ public class GameTest
 	@Test(expected = IllegalMoveException.class)
 	public void testInvalidMove_invalidTurn() throws IllegalMoveException
 	{
-		Game game = new Game(player1, player2, new PitFactoryImpl(6, 6));
+		Game game = new Game(player1, player2, Board.create(6, 6));
 		game.playPit(player2, 0);
 	}
 	
-	private Game createGame(Integer[] downSidePits, Integer[] upSidePits)
+	private Game createGame(int[] downSidePits, int[] upSidePits)
 	{
-		return new Game(player1, player2, createPitFactory(downSidePits, upSidePits));
+		return new Game(player1, player2, Board.createWithSeeds(downSidePits, upSidePits));
 	}
 }

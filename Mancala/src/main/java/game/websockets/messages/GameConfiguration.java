@@ -7,7 +7,7 @@ public class GameConfiguration implements Pushable
 	private final int initialSeeds;
 	private final int pitsPerPlayer;
 
-	public GameConfiguration(long gameId, int initialSeeds, int pitsPerPlayer, boolean startPlayer)
+	public GameConfiguration(long gameId, int pitsPerPlayer, int initialSeeds, boolean startPlayer)
 	{
 		this.gameId = gameId;
 		this.initialSeeds = initialSeeds;

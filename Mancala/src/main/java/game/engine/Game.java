@@ -13,12 +13,12 @@ public class Game
 	private Player winner;
 	private boolean tie;
 	
-	public Game(Player firstPlayer, Player secondPlayer, PitFactory pitFactory)
+	public Game(Player firstPlayer, Player secondPlayer, Board board)
 	{
 		if (firstPlayer == null || secondPlayer == null)
 			throw new IllegalArgumentException("firstPlayer and secondPlayer can not be null");
 		
-		this.board = new Board(pitFactory);
+		this.board = board;
 		this.firstPlayer = firstPlayer;
 		this.secondPlayer = secondPlayer;
 		this.turn = firstPlayer;

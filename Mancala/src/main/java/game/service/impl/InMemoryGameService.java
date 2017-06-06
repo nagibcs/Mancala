@@ -8,9 +8,9 @@ import javax.inject.Singleton;
 
 import org.springframework.stereotype.Service;
 
+import game.engine.Board;
 import game.engine.Board.BoardSide;
 import game.engine.Game;
-import game.engine.PitFactoryImpl;
 import game.engine.Player;
 import game.model.User;
 import game.service.GameService;
@@ -76,13 +76,13 @@ public class InMemoryGameService implements GameService
 			game = new Game(
 					new Player(waitingUser, BoardSide.SOUTH), 
 					new Player(user, BoardSide.NORTH), 
-					new PitFactoryImpl(PITS_PER_PLAYER, INITIAL_SEEDS));
+					Board.create(PITS_PER_PLAYER, INITIAL_SEEDS));
 			runningGames.put(lastGameId, game);
 			
 			waitingUser = null;
 		}
 		
-		return new GameConfiguration(lastGameId, INITIAL_SEEDS, PITS_PER_PLAYER, game == null);
+		return new GameConfiguration(lastGameId, PITS_PER_PLAYER, INITIAL_SEEDS, game == null);
 	}
 	
 	private long searchRunningGames(User user)
